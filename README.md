@@ -1,3 +1,6 @@
 ### A small JSON Database
 
-# project objective - to create a light weight json schema-less database.
+[![Code Climate](https://codeclimate.com/github/Matt-Webb/json-db/badges/gpa.svg)](https://codeclimate.com/github/Matt-Webb/json-db)
+[![Build Status](https://travis-ci.org/Matt-Webb/json-db.svg?branch=master)](https://travis-ci.org/Matt-Webb/json-db)
+
+project objective - to create a light weight json schema-less database.
