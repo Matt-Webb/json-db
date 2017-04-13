@@ -19,12 +19,12 @@ const User = function( args ) {
 };
 
 // basic prototype method
-Presenter.prototype.fullName = function() {
+User.prototype.fullName = function() {
 	return `${this.firstName} ${this.secondName}`;
 };
 
 // basic object literal used for saving to the database
-Presenter.prototype.toObj = function() {
+User.prototype.toObj = function() {
 	const data = {
 		id: this.id,
 		created: this.created,

@@ -102,7 +102,7 @@ describe( "Database", function () {
 	describe( "createUser()", function () {
 
 		it( "should create a json record", ( done ) => {
-			db.createuser( pre1, ( err, data ) => {
+			db.createUser( pre1, ( err, data ) => {
 				assert.ifError( err );
 				assert( data );
 			} );
@@ -126,9 +126,9 @@ describe( "Database", function () {
 			done();
 		} );
 
-		it( "should call createuser method only once", ( done ) => {
+		it( "should call createUser method only once", ( done ) => {
 			let spy = sinon.spy( db, "createUser" );
-			db.createuser( pre1, ( err ) => {
+			db.createUser( pre1, ( err ) => {
 				assert.ifError( err );
 				assert( spy.calledOnce );
 			} );
@@ -137,7 +137,7 @@ describe( "Database", function () {
 
 		it( "should call getusers method only once", ( done ) => {
 			let spy = sinon.spy( db, "getUsers" );
-			db.createuser( pre1, ( err ) => {
+			db.createUser( pre1, ( err ) => {
 				assert.ifError( err );
 				assert( spy.calledOnce );
 			} );
