@@ -11,7 +11,7 @@ import uuidV1 from "uuid/v1";
 import	moment from "moment";
 
 // constructor
-const User = function( args ) {
+const User = ( args ) => {
 	this.id = uuidV1();
 	this.created = moment().unix();
 	this.firstName = args.firstName;
@@ -19,21 +19,19 @@ const User = function( args ) {
 };
 
 // basic prototype method
-User.prototype.fullName = function() {
+User.prototype.fullName = () => {
 	return `${this.firstName} ${this.secondName}`;
 };
 
 // basic object literal used for saving to the database
-User.prototype.toObj = function() {
-	const data = {
-		id: this.id,
-		created: this.created,
-		firstName: this.firstName,
-		secondName: this.secondName,
-		fullName: this.fullName()
+User.prototype.toObj = () => {
+	return {
+		id: 		this.id,
+		created: 	this.created,
+		firstName: 	this.firstName,
+		secondName: 	this.secondName,
+		fullName: 	this.fullName()
 	};
-
-	return data; // JSON.stringify( data ); // moved onto service.database.
 };
 
 // interface
