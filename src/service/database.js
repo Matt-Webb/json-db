@@ -23,7 +23,7 @@ const Database = function( config ) {
  * @param {Function} callback function executed on return.
  * @returns {Function} Returns `function`.
  */
-Database.prototype.get = async function get() {
+Database.prototype.get = function get( callback ) {
 
 	const file = this.file;
 
@@ -57,7 +57,7 @@ Database.prototype.get = async function get() {
  * @param {Function} callback function executed on return.
  * @returns {Function} Returns `function`.
  */
-Database.prototype.create = async function ( obj ) {
+Database.prototype.create = function ( obj, callback ) {
 
 	let file = this.file;
 
@@ -77,9 +77,9 @@ Database.prototype.create = async function ( obj ) {
 				return new Error( `${file}: ${err}` );
 			}
 
-			await return fs.writeFile( file, str, {
+			fs.writeFile( file, str, {
 				flag: "a" // allows data to be appended to the existing file.
-			}, function() { });
+			}, callback );
 		}
 	} );
 };

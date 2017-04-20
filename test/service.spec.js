@@ -44,7 +44,7 @@ describe( "Database", function () {
 		done();
 	} );
 
-	describe( "getUsers()", function () {
+	describe( "get()", function () {
 
 		it( "should read and parse JSON", ( done ) => {
 			const user = {
@@ -54,7 +54,7 @@ describe( "Database", function () {
 
 			fs.writeFileSync( file, JSON.stringify( user ) );
 
-			db.getUsers( ( err, arr ) => {
+			db.get( ( err, arr ) => {
 				assert.ifError( err );
 				assert.equal( arr[ 0 ].firstName, user.firstName );
 				done();
@@ -66,7 +66,7 @@ describe( "Database", function () {
 			fs.writeFileSync( file, JSON.stringify( pre1 ) );
 			fs.writeFileSync( file, JSON.stringify( pre2 ) );
 
-			db.getUsers( ( err, arr ) => {
+			db.get( ( err, arr ) => {
 				assert( arr instanceof Array );
 				assert( arr.length === 1 );
 				done();
@@ -77,20 +77,20 @@ describe( "Database", function () {
 
 			fs.writeFileSync( file, "{" );
 
-			db.getUsers( ( err ) => {
+			db.get( ( err ) => {
 				assert( err instanceof Error );
 				assert( err.message.match( file ) );
 				done();
 			} );
 		} );
 
-		it( "should call getUsers method only once", ( done ) => {
+		it( "should call get method only once", ( done ) => {
 
-			let spy = sinon.spy( db, "getUsers" );
+			let spy = sinon.spy( db, "get" );
 
 			fs.writeFileSync( file, JSON.stringify( pre1 ) );
 
-			db.getUsers( ( err ) => {
+			db.get( ( err ) => {
 				assert.ifError( err );
 				assert( spy.calledOnce );
 				done();
@@ -100,10 +100,10 @@ describe( "Database", function () {
 
 	} );
 
-	describe( "createUser()", function () {
+	describe( "create()", function () {
 
 		it( "should create a json record", ( done ) => {
-			db.createUser( pre1, ( err, data ) => {
+			db.create( pre1, ( err, data ) => {
 				assert.ifError( err );
 				assert( data );
 			} );
@@ -120,25 +120,25 @@ describe( "Database", function () {
 
 			fs.writeFileSync( file, JSON.stringify( pre1 ) );
 
-			db.createUser( pre1, ( err ) => {
+			db.create( pre1, ( err ) => {
 				assert( err instanceof Error );
         assert( err.message.match( pre1.fullName ));
 			} );
 			done();
 		} );
 
-		it( "should call createUser method only once", ( done ) => {
-			let spy = sinon.spy( db, "createUser" );
-			db.createUser( pre1, ( err ) => {
+		it( "should call create method only once", ( done ) => {
+			let spy = sinon.spy( db, "create" );
+			db.create( pre1, ( err ) => {
 				assert.ifError( err );
 				assert( spy.calledOnce );
 			} );
 			done();
 		} );
 
-		it( "should call getusers method only once", ( done ) => {
-			let spy = sinon.spy( db, "getUsers" );
-			db.createUser( pre1, ( err ) => {
+		it( "should call get method only once", ( done ) => {
+			let spy = sinon.spy( db, "get" );
+			db.create( pre1, ( err ) => {
 				assert.ifError( err );
 				assert( spy.calledOnce );
 			} );
