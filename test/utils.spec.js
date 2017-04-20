@@ -5,7 +5,7 @@
  */
 
 import assert from "assert";
-import util from "../utils";
+import util from "../src/utils";
 
 /* global describe it beforeEach */
 

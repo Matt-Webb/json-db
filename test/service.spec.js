@@ -10,8 +10,9 @@ import os from "os";
 import path from "path";
 import sinon from "sinon";
 import rimraf from "rimraf";
-import User from "../model";
-import Database from "../service";
+
+import User from "../src/model";
+import Database from "../src/service";
 
 /* global describe it beforeEach afterEach */
 

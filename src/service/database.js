@@ -23,7 +23,7 @@ const Database = function( config ) {
  * @param {Function} callback function executed on return.
  * @returns {Function} Returns `function`.
  */
-Database.prototype.getUsers = function ( callback ) {
+Database.prototype.get = async function get() {
 
 	const file = this.file;
 
@@ -57,33 +57,29 @@ Database.prototype.getUsers = function ( callback ) {
  * @param {Function} callback function executed on return.
  * @returns {Function} Returns `function`.
  */
-Database.prototype.createUser = function ( user, callback ) {
+Database.prototype.create = async function ( obj ) {
 
 	let file = this.file;
-	/**
-	 * Check if the record exists! Please advert your eyes ...
-	 * no indexing, no streaming, just a plain old read the entire file,
-	 * loop it and string match to return true if we find what we want.
-	 */
-	this.getUsers( ( err, data ) => {
 
-		if ( err ) return callback( new Error( err ) );
+	this.get( ( err, data ) => {
+
+		if ( err ) return new Error( err );
 
 		let exists = util.exists( data, user.fullName, "fullName" );
 
 		if ( exists ) {
-			return callback( new Error( `Record for ${user.fullName} already exists!` ) );
+			return new Error( `Record for ${user.fullName} already exists!` );
 		} else {
 			let str = "";
 			try {
 				str = JSON.stringify( user ) + "\n"; // add line break
 			} catch ( err ) {
-				return callback( new Error( `${file}: ${err}` ), null );
+				return new Error( `${file}: ${err}` );
 			}
 
-			fs.writeFile( file, str, {
+			await return fs.writeFile( file, str, {
 				flag: "a" // allows data to be appended to the existing file.
-			}, callback );
+			}, function() { });
 		}
 	} );
 };

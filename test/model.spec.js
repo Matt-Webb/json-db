@@ -5,7 +5,7 @@
 */
 
 import assert from "assert";
-import User from "../model";
+import User from "../src/model";
 
 /* global describe it beforeEach */
 
